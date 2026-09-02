@@ -1,0 +1,14 @@
+com\resolvedesk\domain\TicketEvent.class
+com\resolvedesk\web\TicketController$CreateTicketRequest.class
+com\resolvedesk\domain\OrderCache.class
+com\resolvedesk\web\TicketController$TicketResponse.class
+com\resolvedesk\repository\TicketRepository.class
+com\resolvedesk\repository\TicketEventRepository.class
+com\resolvedesk\domain\Ticket.class
+com\resolvedesk\domain\Brand.class
+com\resolvedesk\domain\TicketCategory.class
+com\resolvedesk\domain\TicketStatus.class
+com\resolvedesk\web\TicketController.class
+com\resolvedesk\repository\OrderCacheRepository.class
+com\resolvedesk\repository\BrandRepository.class
+com\resolvedesk\ResolveDeskApplication.class
