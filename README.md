@@ -17,12 +17,16 @@ Autonomous support desk backend for D2C brands. Auto-classifies and auto-resolve
 - [x] Docker Compose setup (PostgreSQL 16-alpine)
 - [x] `mvn test` passing end-to-end
 - [x] `mvn spring-boot:run` starting cleanly
+- [x] LLM provider abstraction (`LlmClient`, `GeminiClient` via standard HttpClient)
+- [x] LLM configuration via `.env` / `application.yml`
+- [x] Ticket classifier service with async triggering on ticket creation
+- [x] Escalation pre-filter (bypasses LLM for deterministic legal/profanity keywords)
+- [x] Classifier unit and mocked integration tests
 
 ### ⏳ Not Yet Built
-- Ticket classifier (LLM-based)
 - Policy engine (JSON-based rules evaluation)
 - Auto-resolver (rule matching → action execution)
-- Escalation logic
+- Escalation logic / human UI endpoint
 - Additional REST endpoints (GET list, webhook handlers, etc.)
 
 ## Quick Start

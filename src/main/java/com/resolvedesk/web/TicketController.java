@@ -1,10 +1,8 @@
 package com.resolvedesk.web;
 
-import com.resolvedesk.domain.Brand;
 import com.resolvedesk.domain.Ticket;
-import com.resolvedesk.domain.TicketStatus;
-import com.resolvedesk.repository.BrandRepository;
 import com.resolvedesk.repository.TicketRepository;
+import com.resolvedesk.service.TicketOrchestrator;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -22,7 +20,7 @@ import java.time.OffsetDateTime;
 public class TicketController {
 
     private final TicketRepository tickets;
-    private final BrandRepository brands;
+    private final TicketOrchestrator orchestrator;
 
     public record CreateTicketRequest(
         @NotBlank @Email String customerEmail,
@@ -38,23 +36,18 @@ public class TicketController {
         String body,
         Long brandId,
         String status,
+        String category,
         OffsetDateTime createdAt
     ) {}
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TicketResponse create(@Valid @RequestBody CreateTicketRequest req) {
-        Brand brand = brands.findById(req.brandId())
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Brand not found"));
+        Ticket ticket = orchestrator.createTicket(req.brandId(), req.customerEmail(), req.subject(), req.body());
 
-        Ticket ticket = new Ticket();
-        ticket.setBrand(brand);
-        ticket.setCustomerEmail(req.customerEmail());
-        ticket.setSubject(req.subject());
-        ticket.setBody(req.body());
-        ticket.setStatus(TicketStatus.NEW);
+        // Fire async processing
+        orchestrator.processNewTicketAsync(ticket.getId());
 
-        ticket = tickets.save(ticket);
         return toResponse(ticket);
     }
 
@@ -73,6 +66,7 @@ public class TicketController {
             t.getBody(),
             t.getBrand().getId(),
             t.getStatus().name(),
+            t.getCategory() != null ? t.getCategory().name() : null,
             t.getCreatedAt()
         );
     }

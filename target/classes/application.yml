@@ -10,6 +10,30 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+resolvedesk:
+  llm:
+    provider: ${LLM_PROVIDER:gemini}
+    api-key: ${LLM_API_KEY:dummy}
+    model: ${LLM_MODEL:gemini-1.5-flash}
+    base-url: ${LLM_BASE_URL:}
+  escalation-keywords:
+    - lawyer
+    - legal action
+    - chargeback
+    - consumer court
+    - lawsuit
+    - attorney
+    - sue
+    - legal notice
+    - fuck
+    - shit
+    - damn
+    - asshole
 
 
 

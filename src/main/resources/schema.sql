@@ -54,3 +54,9 @@ CREATE TABLE IF NOT EXISTS escalations (
     resolved_at     TIMESTAMPTZ,
     created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- Seed a dummy brand for testing so POST /tickets doesn't return 404
+INSERT INTO brands (id, name, slug)
+VALUES (1, 'Acme Clothing', 'acme')
+ON CONFLICT (id) DO NOTHING;
+
