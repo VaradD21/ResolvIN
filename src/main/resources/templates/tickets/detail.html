@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Ticket Details')}"></head>
+<body>
+    <header th:replace="~{layout :: nav}"></header>
+    <main>
+        <div class="card">
+            <div class="card-header">
+                <h3 style="margin: 0 0 0.5rem 0;" th:text="${ticket.subject}"></h3>
+                <div>
+                    <span th:class="'badge badge-' + ${ticket.status.name()}" th:text="${ticket.status.name()}"></span>
+                    <span th:if="${ticket.category != null}" class="badge badge-OTHER" th:text="${'Category: ' + ticket.category.name()}"></span>
+                    <span class="text-muted" style="margin-left: 1rem;" th:text="${'Ticket #' + ticket.id + ' • ' + ticket.customerEmail}"></span>
+                </div>
+            </div>
+            <div style="white-space: pre-wrap; margin-bottom: 2rem;" th:text="${ticket.body}"></div>
+            <div class="text-muted">
+                <small th:text="${'Created: ' + #temporals.format(ticket.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></small>
+            </div>
+        </div>
+
+        <h3>Event Timeline</h3>
+        <div class="card">
+            <div th:if="${#lists.isEmpty(events)}" class="text-muted">No events recorded.</div>
+            <div th:each="event : ${events}" class="timeline-event">
+                <h4 th:text="${event.type}"></h4>
+                <small th:text="${#temporals.format(event.createdAt, 'yyyy-MM-dd HH:mm:ss')}"></small>
+                <div th:if="${event.payload != null}">
+                    <pre th:text="${#strings.escapeXml(event.payload)}"></pre>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

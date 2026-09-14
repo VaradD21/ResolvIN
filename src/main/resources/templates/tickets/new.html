@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('New Ticket')}"></head>
+<body>
+    <header th:replace="~{layout :: nav}"></header>
+    <main>
+        <h3>Create Test Ticket</h3>
+        <div class="card" style="max-width: 600px;">
+            <form action="/dashboard/tickets" method="post">
+                <div class="form-group">
+                    <label for="brandId">Brand</label>
+                    <select id="brandId" name="brandId" required>
+                        <option value="">-- Select a Brand --</option>
+                        <option th:each="brand : ${brands}"
+                                th:value="${brand.id}"
+                                th:text="${brand.name}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="customerEmail">Customer Email</label>
+                    <input type="email" id="customerEmail" name="customerEmail" required placeholder="customer@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required placeholder="Where is my order?">
+                </div>
+
+                <div class="form-group">
+                    <label for="body">Body</label>
+                    <textarea id="body" name="body" required placeholder="I haven't received my package..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Create Ticket</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

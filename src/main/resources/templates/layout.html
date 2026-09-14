@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <title th:text="${title}">ResolveDesk</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background: #f9f9f9; color: #333; }
+        header { background: #1a1a1a; color: white; padding: 1rem 2rem; display: flex; gap: 2rem; align-items: baseline; }
+        header h2 { margin: 0; }
+        header a { color: #ccc; text-decoration: none; font-weight: bold; }
+        header a:hover { color: white; }
+        main { padding: 2rem; max-width: 1200px; margin: 0 auto; }
+        table { width: 100%; border-collapse: collapse; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        th, td { text-align: left; padding: 1rem; border-bottom: 1px solid #eee; }
+        th { background: #f1f1f1; }
+        a.td-link { color: #007bff; text-decoration: none; font-weight: bold; }
+        a.td-link:hover { text-decoration: underline; }
+        .badge { display: inline-block; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.85em; font-weight: bold; color: white; }
+        .badge-NEW { background: #6c757d; }
+        .badge-PROCESSING { background: #17a2b8; }
+        .badge-AUTO_RESOLVED { background: #28a745; }
+        .badge-ESCALATED { background: #fd7e14; }
+        .badge-CLOSED { background: #007bff; }
+        .badge-OTHER { background: #343a40; text-transform: uppercase; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
+        .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: inherit;}
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        .btn { background: #007bff; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; cursor: pointer; font-size: 1rem; font-weight: bold; }
+        .btn:hover { background: #0056b3; }
+        .card { background: white; padding: 1.5rem; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 1.5rem; }
+        .card-header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
+        .timeline-event { border-left: 3px solid #007bff; padding-left: 1rem; margin-bottom: 1.5rem; }
+        .timeline-event h4 { margin: 0 0 0.5rem 0; }
+        .timeline-event small { color: #666; }
+        pre { background: #f4f4f4; padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.9em; margin-top: 0.5rem; }
+        .text-muted { color: #666; }
+    </style>
+</head>
+<body>
+    <header th:fragment="nav">
+        <h2>ResolveDesk</h2>
+        <nav>
+            <a href="/dashboard/tickets">Tickets</a>
+            <a href="/dashboard/tickets/new">New Ticket</a>
+        </nav>
+    </header>
+</body>
+</html>

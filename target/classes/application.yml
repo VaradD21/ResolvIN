@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/resolvedesk?sslmode=disable
+    url: jdbc:postgresql://localhost:5434/resolvedesk?sslmode=disable
     username: resolvedesk
     password: resolvedesk
   jpa:

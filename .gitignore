@@ -27,3 +27,6 @@ init.sql
 
 # Spring Boot devtools
 .spring-boot-devtools.properties
+
+
+run.bat

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('Tickets')}"></head>
+<body>
+    <header th:replace="~{layout :: nav}"></header>
+    <main>
+        <h3>All Tickets</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td>
+                        <a class="td-link" th:href="@{/dashboard/tickets/{id}(id=${ticket.id})}" th:text="${'#' + ticket.id}"></a>
+                    </td>
+                    <td th:text="${ticket.customerEmail}"></td>
+                    <td th:text="${#strings.abbreviate(ticket.subject, 50)}"></td>
+                    <td>
+                        <span th:if="${ticket.category != null}" class="badge badge-OTHER" th:text="${ticket.category.name()}"></span>
+                        <span th:if="${ticket.category == null}" class="text-muted">Unclassified</span>
+                    </td>
+                    <td>
+                        <span th:class="'badge badge-' + ${ticket.status.name()}" th:text="${ticket.status.name()}"></span>
+                    </td>
+                    <td th:text="${#temporals.format(ticket.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(tickets)}">
+                    <td colspan="6" style="text-align: center; padding: 2rem;" class="text-muted">No tickets found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
