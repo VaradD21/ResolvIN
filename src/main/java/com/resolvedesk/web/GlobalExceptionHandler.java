@@ -33,6 +33,18 @@ public class GlobalExceptionHandler {
                 .body(Map.of("error", ex.getReason() != null ? ex.getReason() : ex.getMessage()));
     }
 
+    /** 404s for missing static resources like favicon.ico */
+    @ExceptionHandler(org.springframework.web.servlet.resource.NoResourceFoundException.class)
+    public ResponseEntity<Map<String, Object>> handleNoResource(org.springframework.web.servlet.resource.NoResourceFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", "Not found"));
+    }
+
+    /** Method not allowed (e.g. GET on a POST-only endpoint) → 405 */
+    @ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<Map<String, Object>> handleMethodNotSupported(org.springframework.web.HttpRequestMethodNotSupportedException ex) {
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(Map.of("error", ex.getMessage()));
+    }
+
     /** Anything else → 500, log it, no stack trace leaked to client */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Map<String, Object>> handleAny(Exception ex) {

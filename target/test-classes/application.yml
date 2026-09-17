@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:tc:postgresql:16-alpine:///resolvedesk?TC_REUSABLE=false
-    username: test
-    password: test
+    url: ${TEST_DB_URL:jdbc:tc:postgresql:16-alpine:///resolvedesk?TC_REUSABLE=false}
+    username: ${TEST_DB_USERNAME:test}
+    password: ${TEST_DB_PASSWORD:test}
   jpa:
     hibernate:
       ddl-auto: create-drop

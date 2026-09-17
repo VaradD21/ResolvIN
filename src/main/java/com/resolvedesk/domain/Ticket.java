@@ -30,6 +30,9 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     private TicketCategory category;
 
+    @Column
+    private Double confidence;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TicketStatus status = TicketStatus.NEW;

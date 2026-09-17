@@ -1,2 +1,7 @@
-com\resolvedesk\service\ClassifierServiceTest.class
+com\resolvedesk\mail\EmailParserTest.class
 com\resolvedesk\TicketControllerIT.class
+com\resolvedesk\service\ClassifierServiceTest.class
+com\resolvedesk\mail\EmailIngestionIT.class
+com\resolvedesk\TicketPipelineIT.class
+com\resolvedesk\mail\EmailIngestionServiceTest.class
+com\resolvedesk\service\PolicyEvaluatorTest.class

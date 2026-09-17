@@ -1,2 +1,10 @@
+E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\EscalationControllerIT.java
+E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\mail\EmailIngestionIT.java
+E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\mail\EmailIngestionServiceTest.java
+E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\mail\EmailParserTest.java
 E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\service\ClassifierServiceTest.java
+E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\service\EscalationServiceTest.java
+E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\service\PolicyEvaluatorTest.java
 E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\TicketControllerIT.java
+E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\TicketPipelineIT.java
+E:\VIBECODESETUP\ResolvIN\resolvedesk\src\test\java\com\resolvedesk\web\EscalationControllerTest.java

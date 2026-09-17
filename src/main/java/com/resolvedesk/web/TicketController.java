@@ -20,7 +20,15 @@ import java.time.OffsetDateTime;
 public class TicketController {
 
     private final TicketRepository tickets;
+    private final com.resolvedesk.repository.TicketEventRepository events;
     private final TicketOrchestrator orchestrator;
+
+    public record TicketEventResponse(
+        Long id,
+        String type,
+        java.util.Map<String, Object> payload,
+        OffsetDateTime createdAt
+    ) {}
 
     public record CreateTicketRequest(
         @NotBlank @Email String customerEmail,
@@ -37,8 +45,17 @@ public class TicketController {
         Long brandId,
         String status,
         String category,
-        OffsetDateTime createdAt
+        Double confidence,
+        OffsetDateTime createdAt,
+        java.util.List<TicketEventResponse> events
     ) {}
+
+    @GetMapping
+    public java.util.List<TicketResponse> list() {
+        return tickets.findAllByOrderByCreatedAtDesc().stream()
+            .map(this::toResponse)
+            .toList();
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -59,6 +76,10 @@ public class TicketController {
     }
 
     private TicketResponse toResponse(Ticket t) {
+        java.util.List<TicketEventResponse> eventList = events.findByTicketIdOrderByCreatedAtDesc(t.getId()).stream()
+            .map(e -> new TicketEventResponse(e.getId(), e.getType(), e.getPayload(), e.getCreatedAt()))
+            .toList();
+
         return new TicketResponse(
             t.getId(),
             t.getCustomerEmail(),
@@ -67,7 +88,9 @@ public class TicketController {
             t.getBrand().getId(),
             t.getStatus().name(),
             t.getCategory() != null ? t.getCategory().name() : null,
-            t.getCreatedAt()
+            t.getConfidence(),
+            t.getCreatedAt(),
+            eventList
         );
     }
 }

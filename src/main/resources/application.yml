@@ -16,6 +16,7 @@ spring:
       schema-locations: classpath:schema.sql
 
 resolvedesk:
+  global-max-auto-resolve-value: 5000
   llm:
     provider: ${LLM_PROVIDER:gemini}
     api-key: ${LLM_API_KEY:dummy}
@@ -34,6 +35,17 @@ resolvedesk:
     - shit
     - damn
     - asshole
+  mail:
+    enabled: ${MAIL_ENABLED:false}
+    host: ${MAIL_IMAP_HOST:imap.gmail.com}
+    port: ${MAIL_IMAP_PORT:993}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_APP_PASSWORD:}
+    poll-interval-seconds: ${MAIL_POLL_INTERVAL_SECONDS:60}
+    brand-id: ${MAIL_BRAND_ID:1}
+    protocol: ${MAIL_PROTOCOL:imaps}
+    folder: ${MAIL_FOLDER:INBOX}
+
 
 
 

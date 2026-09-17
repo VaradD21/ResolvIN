@@ -1,6 +1,5 @@
 package com.resolvedesk.web;
 
-import com.resolvedesk.domain.Brand;
 import com.resolvedesk.domain.Ticket;
 import com.resolvedesk.domain.TicketEvent;
 import com.resolvedesk.repository.BrandRepository;
@@ -11,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
