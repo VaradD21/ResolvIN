@@ -2,6 +2,16 @@
 
 Autonomous support desk backend for D2C brands. Auto-classifies and auto-resolves routine customer support tickets against brand policy rules, escalating only ambiguous/high-stakes cases to humans.
 
+## Documentation
+
+Detailed modular project documentation is available in the [`docs/`](./docs/README.md) directory:
+- [Architecture Overview](./docs/architecture.md)
+- [API Reference](./docs/api-reference.md)
+- [Database Schema](./docs/database-schema.md)
+- [Policy & Classification Engine](./docs/policy-engine.md)
+- [Frontend & Tauri Guide](./docs/frontend-guide.md)
+- [Development Setup Guide](./docs/development-setup.md)
+
 ## Status
 
 **Foundation layer complete and tested.**
