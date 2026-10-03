@@ -69,27 +69,73 @@ This compiles TypeScript and outputs a clean static bundle in `frontend/dist/`.
 
 ---
 
-## Wrapping with Tauri (Desktop App)
+## Tauri Desktop Application (Native Shell)
 
-Because this frontend has zero server-side dependencies and resolves assets relatively (`base: './'`), wrapping it with Tauri is seamless:
+ResolveDesk includes a native desktop packaging layer built with **Tauri v2** (`frontend/src-tauri/`). It packages the feature-complete React static build into a native, high-performance desktop window without the heavy overhead of Chromium/Electron.
+
+### Prerequisites for Desktop Development
+1. **Node.js**: 18+ (with npm)
+2. **Rust & Cargo**: Latest stable toolchain (install via [rustup.rs](https://rustup.rs/))
+3. **Windows C++ Build Tools**: Visual Studio Build Tools (C++ Desktop development workload) and WebView2 (pre-installed on Windows 10/11)
+
+### Desktop Commands
+
+All commands are run from the `frontend/` directory:
 
 ```bash
-# In e:\VIBECODESETUP\ResolvIN\resolvedesk\frontend
-npm install -D @tauri-apps/cli
-npx tauri init
+cd e:\VIBECODESETUP\ResolvIN\resolvedesk\frontend
 ```
 
-In `src-tauri/tauri.conf.json`:
-- Set `build.distDir` to `../dist`
-- Set `build.devPath` to `http://localhost:5173`
-- Run desktop dev mode:
+#### 1. Install Dependencies
 ```bash
-npx tauri dev
+npm install
 ```
-- Build desktop installer:
+Installs `@tauri-apps/cli` and `@tauri-apps/api` along with React dependencies.
+
+#### 2. Generate App Icons (from included vector icon)
 ```bash
-npx tauri build
+npm run icon
 ```
+*(Runs `npm run tauri icon app-icon.svg` to generate all `.ico`, `.icns`, and multi-resolution `.png` icons in `src-tauri/icons/`).*
+
+#### 3. Run Desktop App in Development Mode
+```bash
+npm run tauri dev
+```
+- Automatically starts Vite on `http://localhost:5173`
+- Launches the native desktop window (1280x800, resizable, centered)
+- Hot-reloads UI changes instantly
+- Preserves window size and position between launches
+
+#### 4. Build Production Desktop Installer & Executable
+```bash
+npm run tauri build
+```
+- First executes `npm run build` (`beforeBuildCommand`) to generate `dist/`
+- Compiles the Rust backend with release optimizations
+- Packages native installers and standalone binaries
+
+### Output Artifact Locations
+
+After running `npm run tauri build`, the compiled artifacts land in:
+
+- **Windows Installer (MSI)**:
+  `frontend/src-tauri/target/release/bundle/msi/ResolveDesk_0.1.0_x64_en-US.msi`
+- **Windows Setup (NSIS .exe)**:
+  `frontend/src-tauri/target/release/bundle/nsis/ResolveDesk_0.1.0_x64-setup.exe`
+- **Standalone Windows Executable**:
+  `frontend/src-tauri/target/release/resolvedesk.exe`
+- **macOS (when built on Mac)**:
+  `frontend/src-tauri/target/release/bundle/dmg/ResolveDesk_0.1.0_x64.dmg`
+- **Linux (when built on Linux)**:
+  `frontend/src-tauri/target/release/bundle/deb/` or `bundle/appimage/`
+
+### Backend Connectivity & Graceful Offline State
+- Desktop shell connects to the Spring Boot backend using `VITE_API_BASE_URL` (defaults to `http://localhost:8080`).
+- If the backend is not running or unreachable on load, the app displays a non-blocking **Backend Service Unreachable** banner with:
+  - Clear diagnosis with configured URL
+  - Direct **Retry Connection** button
+  - Option to dismiss and browse local cached / preview data
 
 ---
 

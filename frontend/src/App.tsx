@@ -6,9 +6,10 @@ import { TicketDetailPage } from './pages/TicketDetailPage';
 import { EscalationsPage } from './pages/EscalationsPage';
 import { NewTicketPage } from './pages/NewTicketPage';
 import { useEscalations } from './hooks/useEscalations';
+import { BackendUnreachableState } from './components/common/BackendUnreachableState';
 
 const AppLayout: React.FC = () => {
-  const { unresolvedCount } = useEscalations();
+  const { unresolvedCount, error, refresh, loading } = useEscalations();
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
@@ -17,6 +18,13 @@ const AppLayout: React.FC = () => {
 
       {/* Main Page Content */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {error && (
+          <BackendUnreachableState
+            error={error}
+            onRetry={refresh}
+            isRetrying={loading}
+          />
+        )}
         <Routes>
           <Route path="/" element={<TicketsListPage />} />
           <Route path="/tickets/:id" element={<TicketDetailPage />} />

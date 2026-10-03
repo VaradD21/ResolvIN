@@ -34,3 +34,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+
+# Tauri & Rust Desktop Build Artifacts
+src-tauri/target/
+src-tauri/gen/
+

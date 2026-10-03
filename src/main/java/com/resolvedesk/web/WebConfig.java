@@ -18,7 +18,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "http://localhost:5173",
                         "http://127.0.0.1:5173",
                         "tauri://localhost",
-                        "http://tauri.localhost"
+                        "http://tauri.localhost",
+                        "https://tauri.localhost"
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowedHeaders("*")

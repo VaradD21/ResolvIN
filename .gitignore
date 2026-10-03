@@ -48,6 +48,13 @@ dist-ssr/
 .pnp
 .pnp.js
 
+# Tauri & Rust Desktop Build Artifacts
+src-tauri/target/
+**/src-tauri/target/
+src-tauri/gen/
+**/src-tauri/gen/
+
+
 # IDEs & Editor Configuration
 .idea/
 *.iml
