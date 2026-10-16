@@ -17,9 +17,9 @@ Detailed modular project documentation is available in the [`docs/`](./docs/READ
 **Foundation layer complete and tested.**
 
 ### ✅ Completed
-- [x] Project structure (Maven, Spring Boot 3.3.4, Java 21)
-- [x] PostgreSQL schema with JSONB support
-- [x] Domain entities: `Brand`, `Ticket`, `TicketEvent`, `OrderCache`
+- ✅ Project structure (Maven, Spring Boot 3.3.4, Java 21)
+- ✅ PostgreSQL schema with JSONB support
+- ✅ Domain entities: `Brand`, `Ticket`, `TicketEvent`, `OrderCache`
 - [x] Enums: `TicketStatus` (NEW, PROCESSING, RESOLVED, ESCALATED, CLOSED), `TicketCategory`
 - [x] JPA repositories for all entities
 - [x] REST controller: `POST /tickets`, `GET /tickets/{id}`
